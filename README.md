@@ -22,8 +22,6 @@ O sistema foi arquitetado em 3 camadas principais que convergem no mesmo banco d
 * O sistema web conta com uma seção dedicada (CTA) para download do `.apk`.
 * O backend atua como API: o App envia as compras diretamente para o script `processar_pagamento.php` via POST, unificando as vendas web e mobile na mesma tabela `pedidos`.
 
----
-
 ## 🛠️ Tecnologias Utilizadas
 
 * **Front-end:** HTML5, CSS3 (CSS Variables, Flexbox, CSS Grid, Glassmorphism), Vanilla JavaScript.
@@ -31,8 +29,6 @@ O sistema foi arquitetado em 3 camadas principais que convergem no mesmo banco d
 * **Banco de Dados:** MySQL (Relacional, com chaves estrangeiras e integridade de dados).
 * **Gateways e APIs:** Mercado Pago API REST (v1/payments).
 * **Acessibilidade:** Integração com a API do VLibras.
-
----
 
 ## 📂 Estrutura do Banco de Dados (`adega_db.sql`)
 
@@ -42,29 +38,20 @@ A arquitetura foi otimizada para evitar redundâncias e suportar o ecossistema o
 * `vinhos`: Armazena catálogo, miniaturas (URLs), metadados da safra e chaves SHA-256 de origem.
 * `pedidos`: Tabela central que recebe as transações PIX geradas tanto pelo Site Web quanto pelo Aplicativo Mobile, atrelando o JSON do carrinho a um ID de pagamento.
 
----
-
 ## ⚙️ Como Rodar o Projeto Localmente
 
 1. **Clone o repositório:**
    ```bash
    git clone [https://github.com/felipesalvim/AdegaSelectSiteGestao.git](https://github.com/felipesalvim/AdegaSelectSiteGestao.git)
 
-```
-
 2. **Configure o Servidor e o Banco:**
 * Mova os arquivos para a pasta raiz do seu servidor local (ex: `htdocs` do XAMPP).
 * Importe o arquivo SQL unificado no seu phpMyAdmin.
 * Ajuste o arquivo `config.php` com as credenciais do seu banco de dados local.
 
-
 3. **Configure as APIs de Pagamento:**
 * Abra o arquivo `processar_pagamento.php`.
 * Insira seu Access Token de Produção do Mercado Pago na variável `$access_token`.
-
-
-
----
 
 ## 🔒 Acesso ao Painel Administrativo
 
@@ -74,8 +61,6 @@ Para fins de teste e avaliação do projeto, utilize as credenciais padrão:
 * **E-mail:** `admin@adegaselect.com.br`
 * **Senha:** (Configurada no momento da importação do Banco de Dados)
 
----
-
 ## 📱 Roadmap (Próximos Passos)
 
 * [x] Unificação de Banco de Dados Web + Mobile.
@@ -83,9 +68,4 @@ Para fins de teste e avaliação do projeto, utilize as credenciais padrão:
 * [ ] Implementação de Webhooks do Mercado Pago para baixar o estoque automaticamente quando o PIX for pago.
 * [ ] Geração de relatórios PDF/Excel das vendas mensais diretamente pelo Painel ERP.
 
----
-
 *Projeto acadêmico focado em demonstração de arquitetura de software, integração de APIs financeiras e experiência do usuário.*
-
-```
-
