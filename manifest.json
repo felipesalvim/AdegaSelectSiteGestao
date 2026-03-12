@@ -1,0 +1,8 @@
+{
+  "name": "Adega Select",
+  "short_name": "Adega Select",
+  "start_url": "index.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#630d0d"
+}

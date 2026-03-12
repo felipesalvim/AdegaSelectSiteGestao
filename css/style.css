@@ -1,0 +1,135 @@
+/* ========================================================= */
+/* VARIÁVEIS E RESET */
+/* ========================================================= */
+:root { 
+    --wine-main: #630d0d; 
+    --wine-dark: #2c0808; 
+    --gold: #c5a028; 
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fafafa; color: #333; }
+
+/* ========================================================= */
+/* HEADER E NAVEGAÇÃO */
+/* ========================================================= */
+header { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+header a { text-decoration: none; color: #333; margin-left: 20px; font-weight: bold; transition: 0.3s; }
+header a:hover { color: var(--wine-main); }
+.badge { background: var(--wine-main); color: white; padding: 2px 6px; border-radius: 50%; font-size: 0.8rem; vertical-align: top; }
+
+/* ========================================================= */
+/* ESTRUTURA E GRID DE VINHOS */
+/* ========================================================= */
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.wine-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+.wine-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #eee; }
+.wine-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.wine-tag { background: var(--gold); color: #fff; padding: 3px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+
+/* ========================================================= */
+/* BOTÕES E FORMS */
+/* ========================================================= */
+.btn-buy { background: linear-gradient(135deg, var(--wine-main), var(--wine-dark)); color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; text-align: center; }
+.btn-buy:hover { opacity: 0.9; transform: scale(1.02); }
+input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
+
+/* ========================================================= */
+/* FILTROS DINÂMICOS (Desktop e Mobile) */
+/* ========================================================= */
+.filter-wrapper { background: #fff; padding: 20px 0; border-bottom: 1px solid #eee; position: sticky; top: 70px; z-index: 90; }
+.filter-group { display: flex; align-items: center; gap: 20px; }
+.filter-label { font-weight: bold; color: var(--wine-dark); min-width: 80px; font-size: 0.9rem; }
+.filter-options { display: flex; gap: 10px; }
+
+/* Botão Estilizado */
+.btn-filter {
+    background: #f8f9fa; border: 1px solid #ddd; color: #555; padding: 6px 18px;
+    border-radius: 20px; cursor: pointer; white-space: nowrap; font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+.btn-filter:hover { border-color: var(--wine-main); color: var(--wine-main); }
+.btn-filter.active { background: var(--wine-main); border-color: var(--wine-main); color: #fff; }
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .filter-group { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .scroll-mobile {
+        width: 100vw; overflow-x: auto; padding-right: 20px;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .scroll-mobile::-webkit-scrollbar { display: none; }
+    .filter-wrapper { top: 60px; }
+    header { padding: 15px 20px; }
+}
+
+/* ========================================================= */
+/* CHATBOT IA FLUTUANTE */
+/* ========================================================= */
+
+/* ESTADO EXPANDIDO (Padrão Janela) */
+#chat-container {
+    position: fixed; bottom: 30px; right: 30px;
+    background: white; z-index: 2000;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 350px; height: 450px; border-radius: 15px; 
+}
+
+/* ESTADO MINIMIZADO (O Círculo) */
+#chat-container.chat-minimized {
+    width: 60px; height: 60px; border-radius: 50%;
+    cursor: pointer; background: var(--wine-main);
+    display: flex; justify-content: center; align-items: center;
+}
+.chat-minimized .header-content, 
+.chat-minimized .chat-close-icon,
+.chat-minimized #chat-body { 
+    display: none !important; 
+}
+.chat-main-icon {
+    display: none; font-size: 1.8rem; color: var(--gold);
+    animation: pulseChat 2s infinite;
+}
+.chat-minimized .chat-main-icon { display: block; } 
+
+.chat-header {
+    background: linear-gradient(135deg, var(--wine-main), var(--wine-dark));
+    color: white; padding: 15px; cursor: pointer; font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+/* CORPO E MENSAGENS */
+#chat-body { display: flex; flex-direction: column; height: calc(100% - 55px); }
+#chat-msgs { 
+    flex: 1; padding: 20px; overflow-y: auto; background: #f4f7f6; 
+    display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth;
+}
+
+/* Balões de Conversa - Atualizados para o novo app.js */
+.chat-msg {
+    max-width: 85%; font-size: 0.9rem; padding: 10px 15px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.user-msg { 
+    align-self: flex-end; background: var(--wine-main); color: white; 
+    border-radius: 15px 15px 0 15px; 
+}
+.bot-msg { 
+    align-self: flex-start; background: white; color: #333; 
+    border-radius: 15px 15px 15px 0; border-left: 3px solid var(--gold);
+}
+
+/* RODAPÉ E INPUT */
+.chat-footer { display: flex; padding: 15px; border-top: 1px solid #eee; background: white; align-items: center;}
+.chat-footer input { 
+    flex: 1; border: 1px solid #ddd; border-radius: 25px; padding: 10px 15px; outline: none; transition: 0.3s;
+}
+.chat-footer input:focus { border-color: var(--wine-main); }
+#btn-send { 
+    background: var(--wine-main); border: none; color: white; cursor: pointer; 
+    width: 35px; height: 35px; border-radius: 50%; margin-left: 10px; 
+    display: flex; justify-content: center; align-items: center; transition: 0.2s;
+}
+#btn-send:hover { transform: scale(1.1); }
+
+@keyframes pulseChat { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
