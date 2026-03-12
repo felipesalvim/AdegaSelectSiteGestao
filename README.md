@@ -88,6 +88,4 @@ Para fins de teste e avaliação do projeto, utilize as credenciais padrão:
 *Projeto acadêmico focado em demonstração de arquitetura de software, integração de APIs financeiras e experiência do usuário.*
 
 ```
-de pedidos e o seu aplicativo mobile, o que vai impressionar qualquer avaliador ou recrutador no seu GitHub.
 
-```
